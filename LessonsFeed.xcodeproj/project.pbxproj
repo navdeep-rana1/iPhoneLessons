@@ -7,10 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		59A6E40229F5617C00C92D3F /* LessonsFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E40129F5617C00C92D3F /* LessonsFeed.docc */; };
 		59A6E40829F5617C00C92D3F /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
 		59A6E40D29F5617C00C92D3F /* LessonsFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */; };
-		59A6E40E29F5617C00C92D3F /* LessonsFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 59A6E40029F5617C00C92D3F /* LessonsFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,8 +23,6 @@
 
 /* Begin PBXFileReference section */
 		59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LessonsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		59A6E40029F5617C00C92D3F /* LessonsFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LessonsFeed.h; sourceTree = "<group>"; };
-		59A6E40129F5617C00C92D3F /* LessonsFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = LessonsFeed.docc; sourceTree = "<group>"; };
 		59A6E40729F5617C00C92D3F /* LessonsFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsFeedTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -71,8 +67,6 @@
 		59A6E3FF29F5617C00C92D3F /* LessonsFeed */ = {
 			isa = PBXGroup;
 			children = (
-				59A6E40029F5617C00C92D3F /* LessonsFeed.h */,
-				59A6E40129F5617C00C92D3F /* LessonsFeed.docc */,
 			);
 			path = LessonsFeed;
 			sourceTree = "<group>";
@@ -92,7 +86,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59A6E40E29F5617C00C92D3F /* LessonsFeed.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +187,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				59A6E40229F5617C00C92D3F /* LessonsFeed.docc in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
