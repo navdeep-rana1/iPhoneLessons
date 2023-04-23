@@ -9,7 +9,7 @@ import XCTest
 @testable import LessonsFeed
 
 final class LessonsFeedTests: XCTestCase {
-
+    
     func test_init_doesnotRequestLoadFromClient(){
         let (sut, client) = makeSUT()
         XCTAssertTrue(client.messages.isEmpty)
@@ -29,7 +29,14 @@ final class LessonsFeedTests: XCTestCase {
         let (sut, client) = makeSUT(url: url)
         var receivedError: RemoteLessonLoader.Error?
         
-        sut.load{ receivedError = $0 }
+        sut.load{ result in
+            switch result{
+            case let .failure(error):
+                receivedError = error
+            case .success(_):
+                XCTFail("Expected error got success instead")
+            }
+        }
         client.complete(with: anyError())
         XCTAssertEqual(receivedError, .noConnectivity)
         
@@ -40,7 +47,14 @@ final class LessonsFeedTests: XCTestCase {
         let (sut, client) = makeSUT(url: url)
         var receivedError: RemoteLessonLoader.Error?
         
-        sut.load{ receivedError = $0 }
+        sut.load{ result in
+            switch result{
+            case let .failure(error):
+                receivedError = error
+            case .success(_):
+                XCTFail("Expected error got success instead")
+            }
+        }
         
         let invalidData = Data(bytes: "Invalid data".utf8)
         client.complete(with: 200, data: invalidData)
@@ -52,23 +66,50 @@ final class LessonsFeedTests: XCTestCase {
         let url = anyURL()
         let (sut, client) = makeSUT(url: url)
         let sampleCodes = [199, 201, 404, 500, 504]
-        var receivedError = [RemoteLessonLoader.Error]()
         
         
         let invalidData = Data(bytes: "Invalid data".utf8)
         
         sampleCodes.enumerated().forEach{ index, element in
-            sut.load{ error in
-                receivedError.append(error)
+            var receivedError = [RemoteLessonLoader.Error]()
+            
+            sut.load{ result in
+                
+                switch result{
+                case let .failure(error):
+                    receivedError.append(error)
+                case .success(_):
+                    XCTFail("Expected error got success instead")
+                }
             }
+            
             client.complete(with: element, data: invalidData, at: index)
             XCTAssertEqual(receivedError, [.invalidData])
-            receivedError = []
         }
         
     }
     
+    func test_load_deliversEmptyJsonOn200StatusCode(){
+        let url = anyURL()
+        let (sut, client) = makeSUT(url: url)
+        var receivedLessonFeed: [LessonFeed]?
+        sut.load{ result in
+                  switch result{
+                  case let .failure(error):
+                      XCTAssertNil(error)
+                  case let .success(feed):
+                      receivedLessonFeed = feed
 
+                  }
+              }
+        
+        let emptyJson = Data(bytes: "{\"lessons\" : []}".utf8)
+        client.complete(with: 200, data: emptyJson)
+        XCTAssertEqual(receivedLessonFeed, [])
+        
+    }
+    
+    
     
     
     func makeSUT(url: URL = URL(string: "http://anyurl.com")!) -> (RemoteLessonLoader, HTTPClientSpy){

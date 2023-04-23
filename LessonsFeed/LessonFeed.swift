@@ -7,14 +7,17 @@
 
 import Foundation
 
-struct LessonFeed{
+struct LessonFeed: Equatable, Decodable{
     let id : Int
     let name: String
-    let description: String
+    let  description: String
     let thumbnail: URL
     let videoURL: URL
 }
 
+struct Root: Decodable{
+    let lessons: [LessonFeed]
+}
 
 enum LessonLoaderResult{
     case success([LessonFeed])
@@ -43,18 +46,28 @@ class RemoteLessonLoader{
         case invalidData
     }
     
+    enum Result{
+        case success([LessonFeed])
+        case failure(Error)
+    }
+    
     init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
     
-    func load(completion: @escaping (Error) -> Void){
+    func load(completion: @escaping (Result) -> Void){
         client.get(from: url){result in
             switch result{
-            case .success(_, _):
-                completion(.invalidData)
+            case let .success(data, _):
+                if let root = try? JSONDecoder().decode(Root.self, from: data){
+                    completion(.success(root.lessons))
+                }else{
+                    completion(.failure(.invalidData))
+                }
+
             case .failure(_):
-                completion(.noConnectivity)
+                completion(.failure(.noConnectivity))
             }
         }
     }
