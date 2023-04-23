@@ -10,27 +10,77 @@ import XCTest
 
 final class LessonsFeedTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func test_init_doesnotRequestLoadFromClient(){
+        let (sut, client) = makeSUT()
+        XCTAssertTrue(client.messages.isEmpty)
+        
+        
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_load_requestsDataFromURL(){
+        let url = anyURL()
+        let (sut, client) = makeSUT(url: url)
+        sut.load{ _ in }
+        XCTAssertEqual(client.messages[0].url, url)
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    
+    func test_load_deliversNoConnectivityErrorOnClientError(){
+        let url = anyURL()
+        let (sut, client) = makeSUT(url: url)
+        var receivedError: RemoteLessonLoader.Error?
+        
+        sut.load{ receivedError = $0 }
+        client.complete(with: anyError())
+        XCTAssertEqual(receivedError, .noConnectivity)
+        
     }
+    
+    func test_load_deliversInvalidDataOn200StatusCode(){
+        let url = anyURL()
+        let (sut, client) = makeSUT(url: url)
+        var receivedError: RemoteLessonLoader.Error?
+        
+        sut.load{ receivedError = $0 }
+        
+        let invalidData = Data(bytes: "Invalid data".utf8)
+        client.complete(with: 200, data: invalidData)
+        XCTAssertEqual(receivedError, .invalidData)
+        
+    }
+    
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func makeSUT(url: URL = URL(string: "http://anyurl.com")!) -> (RemoteLessonLoader, HTTPClientSpy){
+        let client = HTTPClientSpy()
+        let sut = RemoteLessonLoader(url: url, client: client)
+        return (sut, client)
+    }
+   
+    func anyURL() -> URL{
+        return URL(string: "http://anyurl.com")!
+    }
+    
+    func anyError() -> NSError{
+        NSError(domain: "Any error", code: 10)
+    }
+    class HTTPClientSpy: HTTPClient{
+        var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
+        func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
+        {
+            messages.append((url: url, completion: completion))
         }
+        
+        func complete(with error: Error, at index: Int = 0){
+            messages[index].completion(.failure(error))
+        }
+         
+        func complete(with statusCode: Int, data: Data = Data(), at index: Int = 0){
+            let urlResponse = HTTPURLResponse(url: messages[index].url, statusCode: statusCode, httpVersion: nil, headerFields: nil)!
+            
+            messages[index].completion(.success(data, urlResponse))
+        }
+        
+        
     }
-
+    
 }
