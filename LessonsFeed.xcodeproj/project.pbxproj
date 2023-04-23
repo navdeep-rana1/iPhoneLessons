@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		59A6E40829F5617C00C92D3F /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
 		59A6E40D29F5617C00C92D3F /* LessonsFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */; };
+		59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E41729F561AF00C92D3F /* LessonFeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +26,7 @@
 		59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LessonsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A6E40729F5617C00C92D3F /* LessonsFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsFeedTests.swift; sourceTree = "<group>"; };
+		59A6E41729F561AF00C92D3F /* LessonFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFeed.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		59A6E3FF29F5617C00C92D3F /* LessonsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				59A6E41729F561AF00C92D3F /* LessonFeed.swift */,
 			);
 			path = LessonsFeed;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 				TargetAttributes = {
 					59A6E3FC29F5617C00C92D3F = {
 						CreatedOnToolsVersion = 14.1;
+						LastSwiftMigration = 1410;
 					};
 					59A6E40629F5617C00C92D3F = {
 						CreatedOnToolsVersion = 14.1;
@@ -187,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +336,7 @@
 		59A6E41229F5617C00C92D3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -352,6 +358,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -359,6 +366,7 @@
 		59A6E41329F5617C00C92D3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -387,6 +395,7 @@
 		59A6E41529F5617C00C92D3F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4E59WA6F2N;
@@ -402,6 +411,7 @@
 		59A6E41629F5617C00C92D3F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4E59WA6F2N;
