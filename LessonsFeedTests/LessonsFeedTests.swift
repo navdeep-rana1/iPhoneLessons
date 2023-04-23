@@ -48,7 +48,28 @@ final class LessonsFeedTests: XCTestCase {
         
     }
     
+    func test_load_deliversInvalidDataOnNon200StatusCode(){
+        let url = anyURL()
+        let (sut, client) = makeSUT(url: url)
+        let sampleCodes = [199, 201, 404, 500, 504]
+        var receivedError = [RemoteLessonLoader.Error]()
+        
+        
+        let invalidData = Data(bytes: "Invalid data".utf8)
+        
+        sampleCodes.enumerated().forEach{ index, element in
+            sut.load{ error in
+                receivedError.append(error)
+            }
+            client.complete(with: element, data: invalidData, at: index)
+            XCTAssertEqual(receivedError, [.invalidData])
+            receivedError = []
+        }
+        
+    }
+    
 
+    
     
     func makeSUT(url: URL = URL(string: "http://anyurl.com")!) -> (RemoteLessonLoader, HTTPClientSpy){
         let client = HTTPClientSpy()
