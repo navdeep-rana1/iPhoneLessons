@@ -7,14 +7,24 @@
 
 import Foundation
 
-struct LessonFeed: Equatable, Decodable{
+struct LessonFeed: Equatable{
     let id : Int
     let name: String
-    let  description: String
+    let description: String
     let thumbnail: URL
     let videoURL: URL
 }
 
+
+extension LessonFeed: Decodable{
+    private enum CodingKeys: String, CodingKey{
+        case id
+        case name
+        case description
+        case thumbnail
+        case videoURL = "video_url"
+    }
+}
 struct Root: Decodable{
     let lessons: [LessonFeed]
 }
@@ -46,7 +56,7 @@ class RemoteLessonLoader{
         case invalidData
     }
     
-    enum Result{
+    enum Result: Equatable{
         case success([LessonFeed])
         case failure(Error)
     }

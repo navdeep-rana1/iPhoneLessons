@@ -110,7 +110,40 @@ final class LessonsFeedTests: XCTestCase {
     }
     
     
+    func test_load_deliversLessonsOnStatusCode200WithValidData(){
+        let url = anyURL()
+        let (sut, client) = makeSUT(url: url)
+        var capturedResult = [RemoteLessonLoader.Result]()
+        let item1 = LessonFeed(id: 32, name: "some lesson", description: "some description", thumbnail: anyURL(), videoURL: anyURL())
+        let item1Json = ["id": item1.id,
+                         "name": item1.name,
+                         "description": item1.description,
+                         "thumbnail": item1.thumbnail] as! [String : Any]
+        let item2 = LessonFeed(id: 342, name: "some other lesson", description: "some description", thumbnail: anyURL(), videoURL: anyURL())
+        
+        let item2Json = ["id": item2.id,
+                         "name": item2.name,
+                         "description": item2.description,
+                         "thumbnail": item2.thumbnail] as! [String : Any]
+        
+        let arrayItems = ["lessons": [item1Json, item2Json]]
+        sut.load{ capturedResult.append($0) }
+        
+        let jsonArray = try! JSONSerialization.data(withJSONObject: arrayItems)
+        
+        client.complete(with: 200, data: jsonArray)
+        XCTAssertNil(capturedResult)
+        XCTAssertEqual(capturedResult, [.success([item1, item2])])
+        
+    }
     
+    func makeLessonItemJSON() -> [String: Any]{
+        let lesson = LessonFeed(id: 32, name: "some lesson", description: "some description", thumbnail: anyURL(), videoURL: anyURL())
+        return ["id": lesson.id,
+                "name": lesson.name,
+                "description": lesson.description,
+                "thumbnail": lesson.thumbnail]
+    }
     
     func makeSUT(url: URL = URL(string: "http://anyurl.com")!) -> (RemoteLessonLoader, HTTPClientSpy){
         let client = HTTPClientSpy()
