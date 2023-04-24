@@ -55,8 +55,8 @@ final class LessonsFeedEndToEndAPITests: XCTestCase {
                       "How To Take Outstanding Panoramic iPhone Photos",
                       "How To Capture Unique iPhone Street Photography",
                       "Secrets For Capturing Beautiful iPhone Portrait Photos"]
-    let arrayIDs = [950, 7991, 1486, 3657, 400, 851, 3722, 3679, 2372, 4850, 5630]
     
+    let arrayIDs = [950, 7991, 1486, 3657, 400, 851, 3722, 3679, 2372, 4850, 5630]
     
     func anyURL() -> URL{
         return URL(string: "https://iphonephotographyschool.com/test-api/lessons")!
