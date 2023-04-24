@@ -23,3 +23,10 @@ If a user has a working internet connection, they want the app to go to the inte
 ## Flow chart for App:
 ![Alt text](/Images/AppFlow.png "App Flow chart")
 
+## Pointer #2:
+```
+If a user doesn't have a working internet connection, and they open the app and requests to see lessons feed, the app should check for a cached version of the lessons. If a cached version of the lessons is available, display that cache to the user.
+```
+```
+Given there is no internet connectivty and the cache either doesn't exist or has expired, display appropriate error message to the user. 
+```
