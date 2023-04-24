@@ -158,6 +158,7 @@ final class LessonsFeedTests: XCTestCase {
     func anyError() -> NSError{
         NSError(domain: "Any error", code: 10)
     }
+    
     class HTTPClientSpy: HTTPClient{
         var messages = [(url: URL, completion: (HTTPClientResult) -> Void)]()
         func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
