@@ -53,10 +53,6 @@ struct LocalLesson{
     public let description: String
     public let thumbnail: URL
     public let videoURL: URL
-    
-    public var lesson: LessonFeed{
-        return LessonFeed(id: id, name: name, description: description, thumbnail: thumbnail, videoURL: videoURL)
-    }
 
 }
 
