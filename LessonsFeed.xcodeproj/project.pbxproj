@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		596504EC29F70A2200241F77 /* CacheLessonsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596504EB29F70A2200241F77 /* CacheLessonsTests.swift */; };
 		59A6E40829F5617C00C92D3F /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
 		59A6E40D29F5617C00C92D3F /* LessonsFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */; };
 		59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E41729F561AF00C92D3F /* LessonFeed.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		596504EB29F70A2200241F77 /* CacheLessonsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLessonsTests.swift; sourceTree = "<group>"; };
 		59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LessonsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A6E40729F5617C00C92D3F /* LessonsFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsFeedTests.swift; sourceTree = "<group>"; };
@@ -102,6 +104,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		596504EA29F70A0400241F77 /* Lessons Cache */ = {
+			isa = PBXGroup;
+			children = (
+				596504EB29F70A2200241F77 /* CacheLessonsTests.swift */,
+			);
+			path = "Lessons Cache";
+			sourceTree = "<group>";
+		};
 		59A6E3F329F5617C00C92D3F = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +150,7 @@
 		59A6E40B29F5617C00C92D3F /* LessonsFeedTests */ = {
 			isa = PBXGroup;
 			children = (
+				596504EA29F70A0400241F77 /* Lessons Cache */,
 				59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */,
 				59CE732E29F65FB300390EF9 /* URLSessionHTTPClientTests.swift */,
 				59CE734B29F6BC9100390EF9 /* XCTTest+Memory.swift */,
@@ -351,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				596504EC29F70A2200241F77 /* CacheLessonsTests.swift in Sources */,
 				59A6E40D29F5617C00C92D3F /* LessonsFeedTests.swift in Sources */,
 				59CE732F29F65FB300390EF9 /* URLSessionHTTPClientTests.swift in Sources */,
 				59CE734C29F6BC9100390EF9 /* XCTTest+Memory.swift in Sources */,
