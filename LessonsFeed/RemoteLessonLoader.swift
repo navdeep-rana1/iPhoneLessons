@@ -27,7 +27,7 @@ public class RemoteLessonLoader{
     }
     
     public func load(completion: @escaping (Result) -> Void){
-        client.get(from: url){result in
+        client.get(from: url){ result in
             switch result{
             case let .success(data, response):
                 

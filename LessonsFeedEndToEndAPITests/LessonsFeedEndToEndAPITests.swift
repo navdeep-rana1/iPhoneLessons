@@ -25,17 +25,18 @@ final class LessonsFeedEndToEndAPITests: XCTestCase {
         }
         wait(for: [exp], timeout: 5)
 
-        XCTAssertEqual(receivedFeed.count, 11)
-        XCTAssertEqual(receivedFeed[0].name, "The Key To Success In iPhone Photography")
-        XCTAssertEqual(receivedFeed[1].name, "How To Choose The Correct iPhone Camera Lens")
-        XCTAssertEqual(receivedFeed[2].name, "5 Unique Ways To Release The iPhone's Shutter")
-        XCTAssertEqual(receivedFeed[9].name, "How To Capture Unique iPhone Street Photography")
-        XCTAssertEqual(receivedFeed[10].name, "Secrets For Capturing Beautiful iPhone Portrait Photos")
+        XCTAssertEqual(receivedFeed.count, 11, "Expected 11 items from the backend")
+        XCTAssertEqual(receivedFeed[0].name, lessonAt(index: 0).name)
+        XCTAssertEqual(receivedFeed[1].name, lessonAt(index: 1).name)
+        XCTAssertEqual(receivedFeed[2].name, lessonAt(index: 2).name)
+        XCTAssertEqual(receivedFeed[9].name, lessonAt(index: 9).name)
+        XCTAssertEqual(receivedFeed[10].name, lessonAt(index: 10).name)
     }
     
     func makeSUT(url: URL = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!) -> (RemoteLessonLoader, HTTPClient){
         let client = URLSession.shared
         let sut = RemoteLessonLoader(url: url, client: client)
+        trackForMemoryLeaks(ofInstance: sut)
         return (sut, client)
     }
     
