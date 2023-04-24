@@ -17,6 +17,9 @@
 		59CE733A29F686AA00390EF9 /* LessonsFeedAllTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE733929F686AA00390EF9 /* LessonsFeedAllTests.swift */; };
 		59CE733B29F686AA00390EF9 /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
 		59CE734229F6900200390EF9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 59CE734129F6900200390EF9 /* README.md */; };
+		59CE734429F69DDD00390EF9 /* LessonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE734329F69DDD00390EF9 /* LessonLoader.swift */; };
+		59CE734629F69DF800390EF9 /* RemoteLessonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE734529F69DF800390EF9 /* RemoteLessonLoader.swift */; };
+		59CE734829F69E3700390EF9 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE734729F69E3700390EF9 /* HTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +58,9 @@
 		59CE733729F686AA00390EF9 /* LessonsFeedAllTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedAllTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CE733929F686AA00390EF9 /* LessonsFeedAllTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsFeedAllTests.swift; sourceTree = "<group>"; };
 		59CE734129F6900200390EF9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		59CE734329F69DDD00390EF9 /* LessonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonLoader.swift; sourceTree = "<group>"; };
+		59CE734529F69DF800390EF9 /* RemoteLessonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteLessonLoader.swift; sourceTree = "<group>"; };
+		59CE734729F69E3700390EF9 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +126,9 @@
 			children = (
 				59CE733029F6859100390EF9 /* HTTPClient */,
 				59A6E41729F561AF00C92D3F /* LessonFeed.swift */,
+				59CE734329F69DDD00390EF9 /* LessonLoader.swift */,
+				59CE734529F69DF800390EF9 /* RemoteLessonLoader.swift */,
+				59CE734729F69E3700390EF9 /* HTTPClient.swift */,
 			);
 			path = LessonsFeed;
 			sourceTree = "<group>";
@@ -325,7 +334,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59CE734429F69DDD00390EF9 /* LessonLoader.swift in Sources */,
+				59CE734829F69E3700390EF9 /* HTTPClient.swift in Sources */,
 				59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */,
+				59CE734629F69DF800390EF9 /* RemoteLessonLoader.swift in Sources */,
 				59CE733229F6859E00390EF9 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
