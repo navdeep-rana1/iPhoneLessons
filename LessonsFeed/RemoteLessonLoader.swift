@@ -30,13 +30,11 @@ public class RemoteLessonLoader{
         client.get(from: url){ result in
             switch result{
             case let .success(data, response):
-                
                 if let lessons = try? RemoteLessonsLocalFeed.lessonMapper(data: data, response: response){
                     completion(.success(lessons.toFeedLesson()))
                 }else{
                     completion(.failure(.invalidData))
                 }
-
             case .failure(_):
                 completion(.failure(.noConnectivity))
             }
