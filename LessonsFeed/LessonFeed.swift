@@ -7,12 +7,12 @@
 
 import Foundation
 
-struct LessonFeed: Equatable{
-    let id : Int
-    let name: String
-    let description: String
-    let thumbnail: URL
-    let videoURL: URL
+public struct LessonFeed: Equatable{
+    public let id : Int
+    public let name: String
+    public let description: String
+    public let thumbnail: URL
+    public let videoURL: URL
 }
 
 
@@ -39,34 +39,34 @@ protocol LessonLoader{
     func load(completion: @escaping (LessonLoaderResult) -> Void)
 }
 
-enum HTTPClientResult{
+public enum HTTPClientResult{
     case success(Data, HTTPURLResponse)
     case failure(Error)
 }
-protocol HTTPClient{
+public protocol HTTPClient{
     func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void)
 }
 
-class RemoteLessonLoader{
+public class RemoteLessonLoader{
     private let url: URL
     private let client: HTTPClient
     
-    enum Error: Swift.Error{
+   public enum Error: Swift.Error{
         case noConnectivity
         case invalidData
     }
     
-    enum Result: Equatable{
+    public enum Result: Equatable{
         case success([LessonFeed])
         case failure(Error)
     }
     
-    init(url: URL, client: HTTPClient) {
+    public init(url: URL, client: HTTPClient) {
         self.url = url
         self.client = client
     }
     
-    func load(completion: @escaping (Result) -> Void){
+    public func load(completion: @escaping (Result) -> Void){
         client.get(from: url){result in
             switch result{
             case let .success(data, _):

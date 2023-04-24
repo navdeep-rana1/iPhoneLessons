@@ -12,6 +12,7 @@
 		59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E41729F561AF00C92D3F /* LessonFeed.swift */; };
 		59CE732729F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE732629F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift */; };
 		59CE732829F6542100390EF9 /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
+		59CE732F29F65FB300390EF9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE732E29F65FB300390EF9 /* URLSessionHTTPClientTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		59A6E41729F561AF00C92D3F /* LessonFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonFeed.swift; sourceTree = "<group>"; };
 		59CE732429F6542100390EF9 /* LessonsFeedEndToEndAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedEndToEndAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CE732629F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsFeedEndToEndAPITests.swift; sourceTree = "<group>"; };
+		59CE732E29F65FB300390EF9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */,
+				59CE732E29F65FB300390EF9 /* URLSessionHTTPClientTests.swift */,
 			);
 			path = LessonsFeedTests;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59A6E40D29F5617C00C92D3F /* LessonsFeedTests.swift in Sources */,
+				59CE732F29F65FB300390EF9 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
