@@ -16,7 +16,7 @@ struct LessonFeed: Equatable{
 }
 
 
-extension LessonFeed: Decodable{
+extension LessonFeed: Codable{
     private enum CodingKeys: String, CodingKey{
         case id
         case name
@@ -25,7 +25,7 @@ extension LessonFeed: Decodable{
         case videoURL = "video_url"
     }
 }
-struct Root: Decodable{
+struct Root: Codable{
     let lessons: [LessonFeed]
 }
 
