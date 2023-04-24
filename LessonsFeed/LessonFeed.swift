@@ -13,6 +13,14 @@ public struct LessonFeed: Equatable{
     public let description: String
     public let thumbnail: URL
     public let videoURL: URL
+    
+    public init(id: Int, name: String, description: String, thumbnail: URL, videoURL: URL) {
+        self.id = id
+        self.name = name
+        self.description = description
+        self.thumbnail = thumbnail
+        self.videoURL = videoURL
+    }
 }
 
 
