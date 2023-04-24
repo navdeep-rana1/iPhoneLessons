@@ -11,7 +11,7 @@ import LessonsFeed
 final class LessonsFeedEndToEndAPITests: XCTestCase {
 
     func test_get_loadsLessonsFromAPI(){
-        let (sut, client) = makeSUT()
+        let (sut, _) = makeSUT()
         var receivedFeed = [LessonFeed]()
         let exp = expectation(description: "Wait for request to complete")
         sut.load { result in
@@ -28,8 +28,8 @@ final class LessonsFeedEndToEndAPITests: XCTestCase {
         XCTAssertEqual(receivedFeed[0].name, "The Key To Success In iPhone Photography")
     }
     
-    func makeSUT(url: URL = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!) -> (RemoteLessonLoader, URLSessionHTTPClient){
-        let client = URLSessionHTTPClient()
+    func makeSUT(url: URL = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!) -> (RemoteLessonLoader, HTTPClient){
+        let client = URLSession.shared
         let sut = RemoteLessonLoader(url: url, client: client)
         return (sut, client)
     }
