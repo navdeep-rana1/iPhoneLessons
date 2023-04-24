@@ -13,3 +13,4 @@ Show Lessons from iPhone Photography on TableView with model LessonFeed with fol
  - video_url: URL
 
 ![Alt text](/Images/LessonLoader.png "LessonLoader Overview")
+![Alt text](/Images/AppFlow.png "App Flow chart")
