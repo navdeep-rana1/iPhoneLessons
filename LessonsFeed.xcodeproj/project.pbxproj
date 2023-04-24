@@ -13,6 +13,7 @@
 		59CE732729F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE732629F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift */; };
 		59CE732829F6542100390EF9 /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
 		59CE732F29F65FB300390EF9 /* URLSessionHTTPClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE732E29F65FB300390EF9 /* URLSessionHTTPClientTests.swift */; };
+		59CE733229F6859E00390EF9 /* URLSessionHTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE733129F6859E00390EF9 /* URLSessionHTTPClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,7 @@
 		59CE732429F6542100390EF9 /* LessonsFeedEndToEndAPITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedEndToEndAPITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59CE732629F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonsFeedEndToEndAPITests.swift; sourceTree = "<group>"; };
 		59CE732E29F65FB300390EF9 /* URLSessionHTTPClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClientTests.swift; sourceTree = "<group>"; };
+		59CE733129F6859E00390EF9 /* URLSessionHTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 		59A6E3FF29F5617C00C92D3F /* LessonsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				59CE733029F6859100390EF9 /* HTTPClient */,
 				59A6E41729F561AF00C92D3F /* LessonFeed.swift */,
 			);
 			path = LessonsFeed;
@@ -112,6 +115,14 @@
 				59CE732629F6542100390EF9 /* LessonsFeedEndToEndAPITests.swift */,
 			);
 			path = LessonsFeedEndToEndAPITests;
+			sourceTree = "<group>";
+		};
+		59CE733029F6859100390EF9 /* HTTPClient */ = {
+			isa = PBXGroup;
+			children = (
+				59CE733129F6859E00390EF9 /* URLSessionHTTPClient.swift */,
+			);
+			path = HTTPClient;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */,
+				59CE733229F6859E00390EF9 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,26 +8,12 @@
 import XCTest
 import LessonsFeed
 
-class URLSessionHTTPClient: HTTPClient{
-    private let session: URLSession
-    init(session: URLSession = .shared) {
-        self.session = session
-    }
-    
-    func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void){
-        let urlRequest = URLRequest(url: url)
-       
-        
-    }
-
-}
-
 final class LessonsFeedEndToEndAPITests: XCTestCase {
 
     func test_get_loadsLessonsFromAPI(){
         let (sut, client) = makeSUT()
         var receivedFeed = [LessonFeed]()
-        
+        let exp = expectation(description: "Wait for request to complete")
         sut.load { result in
             switch result{
             case let .success(feed):
@@ -35,7 +21,10 @@ final class LessonsFeedEndToEndAPITests: XCTestCase {
             case let .failure(error):
                 XCTAssertNil(error)
             }
+            exp.fulfill()
         }
+        wait(for: [exp], timeout: 5)
+
         XCTAssertEqual(receivedFeed[0].name, "The Key To Success In iPhone Photography")
     }
     
