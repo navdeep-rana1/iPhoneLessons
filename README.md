@@ -18,7 +18,7 @@ Show Lessons from iPhone Photography on TableView with model LessonFeed with fol
  ```
 If a user has a working internet connection, 
 they want the app to go to the internet in the background
- and fetch latest lessons from the server without any UI freeze
+and fetch latest lessons from the server without any UI freeze
 ```
 
 ### As a developer, we want to follow the given flow chart to achieve this:
@@ -28,12 +28,13 @@ they want the app to go to the internet in the background
 ![Alt text](/Images/AppFlow.png "App Flow chart")
 
 ## Pointer #2:
+
 ```
 If a user doesn't have a working internet connection,
- and they open the app and requests to see lessons feed,
-  the app should check for a cached version of the lessons.
-   If a cached version of the lessons is available, 
-   display that cache to the user.
+and they open the app and requests to see lessons feed,
+the app should check for a cached version of the lessons.
+If a cached version of the lessons is available, 
+display that cache to the user.
 ```
 ```
 Given there is no internet connectivty and the 
