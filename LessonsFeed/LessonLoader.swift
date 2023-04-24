@@ -7,12 +7,12 @@
 
 import Foundation
 
-enum LessonLoaderResult{
+public enum LessonLoaderResult{
     case success([LessonFeed])
     case failure(Error)
 }
 
-protocol LessonLoader{
+public protocol LessonLoader{
     
     func load(completion: @escaping (LessonLoaderResult) -> Void)
 }

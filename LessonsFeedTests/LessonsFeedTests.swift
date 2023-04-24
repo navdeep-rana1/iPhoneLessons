@@ -32,7 +32,7 @@ final class LessonsFeedTests: XCTestCase {
         sut.load{ result in
             switch result{
             case let .failure(error):
-                receivedError = error
+                receivedError = error as? RemoteLessonLoader.Error
             case .success(_):
                 XCTFail("Expected error got success instead")
             }
@@ -50,7 +50,7 @@ final class LessonsFeedTests: XCTestCase {
         sut.load{ result in
             switch result{
             case let .failure(error):
-                receivedError = error
+                receivedError = error as? RemoteLessonLoader.Error
             case .success(_):
                 XCTFail("Expected error got success instead")
             }
@@ -69,13 +69,12 @@ final class LessonsFeedTests: XCTestCase {
         let invalidData = Data.init("Invalid data Representation".utf8)
         
         sampleCodes.enumerated().forEach{ index, element in
-            var receivedError = [RemoteLessonLoader.Error]()
+            var receivedError = [RemoteLessonLoader.Error?]()
             
             sut.load{ result in
-                
                 switch result{
                 case let .failure(error):
-                    receivedError.append(error)
+                    receivedError.append(error as? RemoteLessonLoader.Error)
                 case .success(_):
                     XCTFail("Expected error got success instead")
                 }
@@ -112,6 +111,7 @@ final class LessonsFeedTests: XCTestCase {
         let url = anyURL()
         let (sut, client) = makeSUT(url: url)
         var capturedResults = [RemoteLessonLoader.Result]()
+        
         let item1 = LessonFeed(id: 32, name: "some lesson", description: "some description", thumbnail: anyURL(), videoURL: anyURL())
         let item1Json = ["id": item1.id,
                          "name": item1.name,
@@ -126,13 +126,24 @@ final class LessonsFeedTests: XCTestCase {
                          "thumbnail": item2.thumbnail.absoluteString,
                          "video_url": item2.videoURL.absoluteString] as! [String : Any]
         
+        
         let arrayItems = ["lessons": [item1Json, item2Json]]
-        sut.load{ capturedResults.append($0) }
+        let exp = expectation(description: "Wait for request")
+        sut.load{ result in
+            switch result{
+            case let .success(lessons):
+                XCTAssertEqual(lessons, [item1, item2])
+            case .failure(_):
+                XCTFail("Expected result with success but got failure")
+            }
+            exp.fulfill()
+            
+        }
         
         let jsonArray = try? JSONSerialization.data(withJSONObject: arrayItems,options: .fragmentsAllowed)
         
         client.complete(with: 200, data: jsonArray!)
-        XCTAssertEqual(capturedResults, [.success([item1, item2])])
+        wait(for: [exp], timeout: 1.0)
         
     }
     

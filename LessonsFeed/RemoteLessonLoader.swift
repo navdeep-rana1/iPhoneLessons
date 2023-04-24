@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class RemoteLessonLoader{
+public class RemoteLessonLoader: LessonLoader{
     private let url: URL
     private let client: HTTPClient
     
@@ -16,10 +16,7 @@ public class RemoteLessonLoader{
         case invalidData
     }
     
-    public enum Result: Equatable{
-        case success([LessonFeed])
-        case failure(Error)
-    }
+    public typealias Result = LessonLoaderResult
     
     public init(url: URL, client: HTTPClient) {
         self.url = url
@@ -33,10 +30,10 @@ public class RemoteLessonLoader{
                 if let lessons = try? RemoteLessonsLocalFeed.lessonMapper(data: data, response: response){
                     completion(.success(lessons.toFeedLesson()))
                 }else{
-                    completion(.failure(.invalidData))
+                    completion(.failure(Error.invalidData))
                 }
             case .failure(_):
-                completion(.failure(.noConnectivity))
+                completion(.failure(Error.noConnectivity))
             }
         }
     }
