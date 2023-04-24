@@ -8,7 +8,7 @@ import Foundation
 import XCTest
 import LessonsFeed
 
-class URLSessionHTTPClient{
+class URLSessionHTTPClient: HTTPClient{
     private let session: URLSession
     init(session: URLSession = .shared) {
         self.session = session
@@ -27,17 +27,19 @@ class URLSessionHTTPClient{
 final class URLSessionHTTPClientTests: XCTestCase {
 
     
+    
     func test_getFromURL_assertCorrectRequestWithRightURLisInvoked(){
         URLProtocolStubs.registerStub()
         let exp = expectation(description: "Wait for request")
 
         URLProtocolStubs.observeRequest = { request in
             XCTAssertEqual(request.url, URL(string: "https://iphonephotographyschool.com/test-api/lessons")!)
+            XCTAssertEqual(request.httpMethod, "GET")
+        
             exp.fulfill()
         }
         
-        let sut = URLSessionHTTPClient()
-        sut.get(from: anyURL()) { _ in
+        makeSUT().get(from: anyURL()) { _ in
         }
         
         wait(for: [exp], timeout: 1)
@@ -51,7 +53,7 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStubs.stub(data: nil, response: nil, error: error)
         let sut = URLSessionHTTPClient()
         let exp = expectation(description: "Wait for request to complete")
-        sut.get(from: url) { result in
+        makeSUT().get(from: url) { result in
             switch result{
             case let .failure(receivedError as NSError):
                 XCTAssertEqual(receivedError.domain, error.domain)
@@ -71,9 +73,8 @@ final class URLSessionHTTPClientTests: XCTestCase {
         let url = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!
         let error = anyError()
         URLProtocolStubs.stub(data: nil, response: nil, error: error)
-        let sut = URLSessionHTTPClient()
         let exp = expectation(description: "Wait for request to complete")
-        sut.get(from: url) { result in
+        makeSUT().get(from: url) { result in
             switch result{
             case let .failure(receivedError as NSError):
                 XCTAssertEqual(receivedError.domain, error.domain)
@@ -88,6 +89,10 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStubs.unRegisterStub()
     }
     
+    
+    func makeSUT() -> HTTPClient{
+        return URLSessionHTTPClient()
+    }
     func anyError() -> NSError{
         NSError(domain: "Any error", code: 10)
     }
