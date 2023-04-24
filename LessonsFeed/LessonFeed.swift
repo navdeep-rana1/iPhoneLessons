@@ -25,7 +25,5 @@ extension LessonFeed: Codable{
         case videoURL = "video_url"
     }
 }
-struct Root: Codable{
-    let lessons: [LessonFeed]
-}
+
 
