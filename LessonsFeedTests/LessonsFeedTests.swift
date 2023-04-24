@@ -66,8 +66,6 @@ final class LessonsFeedTests: XCTestCase {
         let url = anyURL()
         let (sut, client) = makeSUT(url: url)
         let sampleCodes = [199, 201, 404, 500, 504]
-        
-        
         let invalidData = Data.init("Invalid data".utf8)
         
         sampleCodes.enumerated().forEach{ index, element in
