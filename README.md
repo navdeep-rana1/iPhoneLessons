@@ -1,3 +1,13 @@
-# iPhoneLessons
-# iPHone Lessons
-## _Load iPhone Lessons with following details:_
+
+# iPhone Lessons
+
+Show Lessons from iPhone Photography on TableView with model LessonFeed with following structure:
+
+
+## LessonFeed
+
+ - id: Int
+ - name: String
+ - description: String
+ - thumnail: URL
+ - video_url: URL
