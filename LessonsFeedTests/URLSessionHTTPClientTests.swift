@@ -13,10 +13,12 @@ class URLSessionHTTPClient: HTTPClient{
     init(session: URLSession = .shared) {
         self.session = session
     }
-    
+    struct UnexpectedErrorOccured: Error {}
     func get(from url: URL, completion: @escaping (HTTPClientResult) -> Void){
         session.dataTask(with: url){_, _, error in
-            guard error != nil else { return }
+            guard error != nil else {
+                completion(.failure(UnexpectedErrorOccured()))
+                return }
             completion(.failure(error!))
             
         }.resume()
@@ -51,7 +53,6 @@ final class URLSessionHTTPClientTests: XCTestCase {
         let url = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!
         let error = anyError()
         URLProtocolStubs.stub(data: nil, response: nil, error: error)
-        let sut = URLSessionHTTPClient()
         let exp = expectation(description: "Wait for request to complete")
         makeSUT().get(from: url) { result in
             switch result{
@@ -68,18 +69,17 @@ final class URLSessionHTTPClientTests: XCTestCase {
         URLProtocolStubs.unRegisterStub()
     }
     
-    func test_getFromURL_getsData(){
+    func test_getFromURL_assertThatSUTCanHandleAllNilValues(){
         URLProtocolStubs.registerStub()
         let url = URL(string: "https://iphonephotographyschool.com/test-api/lessons")!
-        let error = anyError()
-        URLProtocolStubs.stub(data: nil, response: nil, error: error)
+        URLProtocolStubs.stub(data: nil, response: nil, error: nil)
         let exp = expectation(description: "Wait for request to complete")
         makeSUT().get(from: url) { result in
             switch result{
-            case let .failure(receivedError as NSError):
-                XCTAssertEqual(receivedError.domain, error.domain)
-            case .success(_,_):
-                XCTFail("Expected failure but got success instead")
+            case .failure(let error as URLSessionHTTPClient.UnexpectedErrorOccured):
+                XCTAssertNotNil(error)
+            default:
+                XCTFail("Expected to fail")
             }
             exp.fulfill()
         }
