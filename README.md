@@ -51,6 +51,6 @@ display appropriate error message to the user.
 #### Deletion error:
 1. Save invoked -> Delete invoked -> Delete fails -> Save completes with error
 
-#### Insertin error:
+#### Insertion error:
 1. Save invoked -> Deletes succesfully -> Insertion invoked -> Insertion fails
 -> Save should complete with error 
