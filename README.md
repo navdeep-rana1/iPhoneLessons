@@ -1,7 +1,7 @@
 
 # iPhone Lessons
 
-![Alt text](/Images/iphoness "Screenshot")
+![iPhone Demo](/Images/iphoness "Screenshot")
 Show Lessons from iPhone Photography on TableView with model LessonFeed with following structure:
 
 
