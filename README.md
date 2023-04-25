@@ -41,3 +41,16 @@ Given there is no internet connectivty and the
 cache either doesn't exist or has expired, 
 display appropriate error message to the user. 
 ```
+
+#### Regular use case:
+1. Execute "Save Lessons" with lesson data 
+2. Cache store should delete any previously stored cache
+3. When there is no deletion error, new cache should be inserted
+4. If there is no insertion error either, system delivers success message
+
+#### Deletion error:
+1. Save invoked -> Delete invoked -> Delete fails -> Save completes with error
+
+#### Insertin error:
+1. Save invoked -> Deletes succesfully -> Insertion invoked -> Insertion fails
+-> Save should complete with error 
