@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		595D8BFA29F8378C00261D39 /* LocalLessonLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595D8BF929F8378C00261D39 /* LocalLessonLoader.swift */; };
+		595D8BFC29F837BB00261D39 /* LessonCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 595D8BFB29F837BB00261D39 /* LessonCache.swift */; };
 		596504EC29F70A2200241F77 /* CacheLessonsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 596504EB29F70A2200241F77 /* CacheLessonsTests.swift */; };
 		59A6E40829F5617C00C92D3F /* LessonsFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */; };
 		59A6E40D29F5617C00C92D3F /* LessonsFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59A6E40C29F5617C00C92D3F /* LessonsFeedTests.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		595D8BF929F8378C00261D39 /* LocalLessonLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLessonLoader.swift; sourceTree = "<group>"; };
+		595D8BFB29F837BB00261D39 /* LessonCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonCache.swift; sourceTree = "<group>"; };
 		596504EB29F70A2200241F77 /* CacheLessonsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheLessonsTests.swift; sourceTree = "<group>"; };
 		59A6E3FD29F5617C00C92D3F /* LessonsFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = LessonsFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59A6E40729F5617C00C92D3F /* LessonsFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LessonsFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +108,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		595D8BF829F8376D00261D39 /* Lesson Cache */ = {
+			isa = PBXGroup;
+			children = (
+				595D8BF929F8378C00261D39 /* LocalLessonLoader.swift */,
+				595D8BFB29F837BB00261D39 /* LessonCache.swift */,
+			);
+			path = "Lesson Cache";
+			sourceTree = "<group>";
+		};
 		596504EA29F70A0400241F77 /* Lessons Cache */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +151,7 @@
 		59A6E3FF29F5617C00C92D3F /* LessonsFeed */ = {
 			isa = PBXGroup;
 			children = (
+				595D8BF829F8376D00261D39 /* Lesson Cache */,
 				59CE733029F6859100390EF9 /* HTTPClient */,
 				59A6E41729F561AF00C92D3F /* LessonFeed.swift */,
 				59CE734329F69DDD00390EF9 /* LessonLoader.swift */,
@@ -351,9 +365,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				59CE734429F69DDD00390EF9 /* LessonLoader.swift in Sources */,
+				595D8BFC29F837BB00261D39 /* LessonCache.swift in Sources */,
 				59CE734829F69E3700390EF9 /* HTTPClient.swift in Sources */,
 				59A6E41829F561AF00C92D3F /* LessonFeed.swift in Sources */,
 				59CE734629F69DF800390EF9 /* RemoteLessonLoader.swift in Sources */,
+				595D8BFA29F8378C00261D39 /* LocalLessonLoader.swift in Sources */,
 				59CE733229F6859E00390EF9 /* URLSessionHTTPClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

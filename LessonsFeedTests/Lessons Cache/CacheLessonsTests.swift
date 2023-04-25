@@ -9,34 +9,9 @@ import Foundation
 import XCTest
 import LessonsFeed
 
-class LocalLessonLoader{
-    private let cache: LessonCache
-    
-    init(cache: LessonCache) {
-        self.cache = cache
-    }
-    
-    func save(lesson: [LessonFeed], completion: @escaping (Error?) -> Void){
-        cache.deleteCache{ [weak self] error in
-            if error == nil{
-                self?.cache.insert(cache: lesson, completion: completion)
-            }else{
-                completion(error)
-            }
-        }
-    }
 
-    
-}
 
-protocol LessonCache{
-    typealias DeletionCompletion = (Error?) -> Void
-    typealias InsertionCompletion = (Error?) -> Void
 
-    func deleteCache(completion: @escaping DeletionCompletion)
-    func insert(cache: [LessonFeed], completion: @escaping InsertionCompletion)
-
-}
 class LessonCacheSpy: LessonCache{
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
