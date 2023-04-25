@@ -21,6 +21,8 @@ class LocalLessonLoader{
                 self?.cache.insert(cache: lesson){error in
                     completion(error)
                 }
+            }else{
+                completion(error)
             }
         }
     }
@@ -99,13 +101,34 @@ class CacheLessonsTests: XCTestCase{
     func test_save_insertMethodIsInvokedAfterSuccesfulDeletion(){
         let (sut, cache) = makeSUT()
         let lessons = [makeLesson(), makeLesson()]
+        let exp = expectation(description: "Wait for cache")
         sut.save(lesson: lessons){ error in
             XCTAssertNil(error)
+            exp.fulfill()
         }
         cache.completeDeletion(with: nil, at: 0)
         cache.completeInsertion(with: nil, at: 0)
-        
+        wait(for: [exp], timeout: 1.0)
         XCTAssertEqual(cache.messages, [LessonCache.ReceivedMessages.deleteCache, LessonCache.ReceivedMessages.insertCache(lessons)])
+    }
+    
+    
+    func test_save_failsWithErrorOnDeletionError(){
+        let (sut, cache) = makeSUT()
+        let lessons = [makeLesson(), makeLesson()]
+        let deletionError = anyError()
+        var receivedError: Error?
+        let exp = expectation(description: "Wait for cache")
+        sut.save(lesson: lessons){error in
+            XCTAssertNotNil(error)
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        cache.completeDeletion(with: deletionError, at: 0)
+        wait(for: [exp], timeout: 1.0)
+        XCTAssertEqual(cache.messages, [.deleteCache])
+        XCTAssertEqual(receivedError as NSError?, deletionError)
     }
     
     
