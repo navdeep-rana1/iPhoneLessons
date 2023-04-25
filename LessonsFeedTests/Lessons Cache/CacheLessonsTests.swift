@@ -29,8 +29,15 @@ class LocalLessonLoader{
     
 }
 
+protocol LessonCache{
+    typealias DeletionCompletion = (Error?) -> Void
+    typealias InsertionCompletion = (Error?) -> Void
 
-class LessonCache{
+    func deleteCache(completion: @escaping DeletionCompletion)
+    func insert(cache: [LessonFeed], completion: @escaping InsertionCompletion)
+
+}
+class LessonCacheSpy: LessonCache{
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
     var deleteCount = 0
@@ -44,24 +51,28 @@ class LessonCache{
     }
     var messages = [ReceivedMessages]()
     
-    func deleteCache(completion: @escaping DeletionCompletion){
+    func deleteCache(completion: @escaping DeletionCompletion)
+    {
         deleteCount += 1
         messages.append(.deleteCache)
         deletionCompletion.append(completion)
         
     }
     
-    func insert(cache: [LessonFeed], completion: @escaping InsertionCompletion){
+    func insert(cache: [LessonFeed], completion: @escaping InsertionCompletion)
+    {
         insertCallCount += 1
         insertionCompletion.append(completion)
         messages.append(.insertCache(cache))
     }
     
-    func completeDeletion(with error: Error?, at index: Int){
+    func completeDeletion(with error: Error?, at index: Int)
+    {
         deletionCompletion[index](error)
     }
     
-    func completeInsertion(with error: Error?, at index: Int){
+    func completeInsertion(with error: Error?, at index: Int)
+    {
         insertionCompletion[index](error)
     }
 }
@@ -69,7 +80,7 @@ class LessonCache{
 
 class CacheLessonsTests: XCTestCase{
     func test_init_doesnotDeleteAnySavedCache(){
-        let cache = LessonCache()
+        let cache = LessonCacheSpy()
         _ = LocalLessonLoader(cache: cache)
         
         XCTAssertEqual(cache.deleteCount, 0)
@@ -109,7 +120,7 @@ class CacheLessonsTests: XCTestCase{
         cache.completeDeletion(with: nil, at: 0)
         cache.completeInsertion(with: nil, at: 0)
         wait(for: [exp], timeout: 1.0)
-        XCTAssertEqual(cache.messages, [LessonCache.ReceivedMessages.deleteCache, LessonCache.ReceivedMessages.insertCache(lessons)])
+        XCTAssertEqual(cache.messages, [LessonCacheSpy.ReceivedMessages.deleteCache, LessonCacheSpy.ReceivedMessages.insertCache(lessons)])
     }
     
     
@@ -150,8 +161,38 @@ class CacheLessonsTests: XCTestCase{
             XCTAssertEqual(receivedError as NSError?, insertionError)
         }
     
-    func makeSUT() -> (LocalLessonLoader, LessonCache){
-        let cache = LessonCache()
+    func test_save_completesWithNoErrorOnSuccesfullDeletionAndInsertion(){
+            let (sut, cache) = makeSUT()
+            let lessons = [makeLesson(), makeLesson()]
+            let exp = expectation(description: "Wait for cache")
+            sut.save(lesson: lessons){error in
+                XCTAssertNil(error)
+                exp.fulfill()
+            }
+            
+            cache.completeDeletion(with: nil, at: 0)
+            cache.completeInsertion(with: nil, at: 0)
+            wait(for: [exp], timeout: 1.0)
+            XCTAssertEqual(cache.messages, [.deleteCache, .insertCache(lessons)])
+        }
+    
+    func test_save_callBackNotInvokedWhenInstanceDeallocated(){
+        let (_, cache) = makeSUT()
+        var sut: LocalLessonLoader? = LocalLessonLoader(cache: cache)
+        let lessons = [makeLesson(), makeLesson()]
+        var receivedErrors = [Error]()
+        sut?.save(lesson: lessons){error in
+            if let error{
+                receivedErrors.append(error)
+            }
+        }
+        sut = nil
+        cache.completeDeletion(with: nil, at: 0)
+        XCTAssertTrue(receivedErrors.isEmpty)
+    }
+    
+    func makeSUT() -> (LocalLessonLoader, LessonCacheSpy){
+        let cache = LessonCacheSpy()
         let sut = LocalLessonLoader(cache: cache)
         return (sut, cache)
     }
