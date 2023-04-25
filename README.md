@@ -1,6 +1,7 @@
 
 # iPhone Lessons
-<img align="center" src="/Images/iphoness.png">
+<p align="center"> 
+ <img src="/Images/iphoness.png"> </p>
 
 Show Lessons from iPhone Photography on TableView with model LessonFeed with following structure:
 
