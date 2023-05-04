@@ -11,7 +11,7 @@ import XCTest
 final class LessonsFeedTests: XCTestCase {
     
     func test_init_doesnotRequestLoadFromClient(){
-        let (sut, client) = makeSUT()
+        let (_, client) = makeSUT()
         XCTAssertTrue(client.messages.isEmpty)
         
         
@@ -56,7 +56,7 @@ final class LessonsFeedTests: XCTestCase {
             }
         }
         
-        let invalidData = Data(bytes: "Invalid data".utf8)
+        let invalidData = Data.init("Invalid data".utf8)
         client.complete(with: 200, data: invalidData)
         XCTAssertEqual(receivedError, .invalidData)
         
@@ -100,7 +100,7 @@ final class LessonsFeedTests: XCTestCase {
                   }
               }
         
-        let emptyJson = Data(bytes: "{\"lessons\" : []}".utf8)
+        let emptyJson = Data.init("{\"lessons\" : []}".utf8)
         client.complete(with: 200, data: emptyJson)
         XCTAssertEqual(receivedLessonFeed, [])
         
@@ -110,7 +110,6 @@ final class LessonsFeedTests: XCTestCase {
     func test_load_deliversLessonsOnStatusCode200WithValidData(){
         let url = anyURL()
         let (sut, client) = makeSUT(url: url)
-        var capturedResults = [RemoteLessonLoader.Result]()
         
         let item1 = LessonFeed(id: 32, name: "some lesson", description: "some description", thumbnail: anyURL(), videoURL: anyURL())
         let item1Json = ["id": item1.id,
